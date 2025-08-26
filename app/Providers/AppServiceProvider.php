@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Illuminate\Support\Facades\URL;
 use RuntimeException;
 use Sendportal\Base\Facades\Sendportal;
 
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         Sendportal::setCurrentWorkspaceIdResolver(
             static function () {
