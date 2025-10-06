@@ -12,7 +12,13 @@ php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProv
 
 echo "==> Environment Check..."
 echo "DATABASE_URL is set: ${DATABASE_URL:+YES}"
+if [ -n "$DATABASE_URL" ]; then
+    echo "DATABASE_URL (masked): ${DATABASE_URL:0:20}..."
+else
+    echo "WARNING: DATABASE_URL is NOT SET!"
+fi
 echo "DB_CONNECTION: ${DB_CONNECTION:-not set}"
+echo "APP_ENV: ${APP_ENV:-not set}"
 
 echo "==> Testing database connection..."
 if php artisan db:show; then
