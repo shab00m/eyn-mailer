@@ -1,0 +1,17 @@
+[phases.install]
+cmds = [
+  "rm -f composer.lock",
+  "composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs"
+]
+
+[phases.build]
+cmds = [
+  "php artisan config:clear",
+  "php artisan route:clear", 
+  "php artisan view:clear",
+  "php artisan vendor:publish --provider='Sendportal\\Base\\SendportalBaseServiceProvider' --tag=sendportal-assets --force"
+]
+
+[start]
+cmd = "php -d display_errors=On -d display_startup_errors=On -S 0.0.0.0:$PORT -t public server.php"
+
