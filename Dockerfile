@@ -27,6 +27,13 @@ COPY . /var/www/html
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Create Laravel cache directories
+RUN mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/logs \
+    && mkdir -p /var/www/html/bootstrap/cache
+
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev --no-interaction
 
