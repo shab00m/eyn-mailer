@@ -24,6 +24,10 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -51,5 +55,5 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Use entrypoint script
+ENTRYPOINT ["docker-entrypoint.sh"]
