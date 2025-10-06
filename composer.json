@@ -30,7 +30,8 @@
         },
         "platform": {
             "ext-pcntl": "8.2",
-            "ext-posix": "8.2"
+            "ext-posix": "8.2",
+            "ext-zip": "8.2"
         }
     },
     "extra": {
