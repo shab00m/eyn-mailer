@@ -1,16 +1,25 @@
 #!/bin/bash
 set -e
 
-# Publish vendor assets (SendPortal)
+echo "==> Publishing SendPortal assets..."
 php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProvider" --tag=sendportal-assets --force
 
-# Run migrations (skip if database not available)
-php artisan migrate --force 2>/dev/null || echo "Skipping migrations - database not available or already migrated"
+echo "==> Publishing SendPortal migrations..."
+php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProvider" --tag=sendportal-migrations --force
 
-# Seed admin user (skip if database not available or already seeded)
-php artisan db:seed --class=AdminSeeder --force 2>/dev/null || echo "Skipping seeder - database not available or already seeded"
+echo "==> Publishing SendPortal config..."
+php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProvider" --tag=sendportal-config --force
 
-# Clear and cache config
+echo "==> Checking database connection..."
+php artisan db:show || echo "Warning: Database connection issue detected"
+
+echo "==> Running migrations..."
+php artisan migrate --force || echo "Warning: Migrations failed or already applied"
+
+echo "==> Seeding admin user..."
+php artisan db:seed --class=AdminSeeder --force || echo "Warning: Seeder failed or already applied"
+
+echo "==> Clearing cache..."
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
