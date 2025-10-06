@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libpq-dev \
+    libzip-dev \
     zip \
     unzip \
-    && docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd opcache \
+    && docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd opcache zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable Apache mod_rewrite
