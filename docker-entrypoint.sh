@@ -7,6 +7,9 @@ php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProv
 # Run migrations (skip if database not available)
 php artisan migrate --force 2>/dev/null || echo "Skipping migrations - database not available or already migrated"
 
+# Seed admin user (skip if database not available or already seeded)
+php artisan db:seed --class=AdminSeeder --force 2>/dev/null || echo "Skipping seeder - database not available or already seeded"
+
 # Clear and cache config
 php artisan config:clear
 php artisan route:clear

@@ -36,7 +36,7 @@ class AdminSeeder extends Seeder
         ])->save();
 
         $workspace = Workspace::firstOrCreate(
-            ['name' => '4 Star Electronics'],
+            ['name' => 'Innovative Tools'],
             ['owner_id' => $user->id]
         );
 
