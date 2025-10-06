@@ -27,6 +27,10 @@
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": true
+        },
+        "platform": {
+            "ext-pcntl": "8.2",
+            "ext-posix": "8.2"
         }
     },
     "extra": {
