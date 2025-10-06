@@ -1,13 +1,12 @@
 {
-  "$schema": "https://railway.app/railway.schema.json",
-  "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "composer install --no-dev --prefer-dist --no-interaction && php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan vendor:publish --provider=\"Sendportal\\Base\\SendportalBaseServiceProvider\" --tag=sendportal-assets --force"
-  },
-  "deploy": {
-    "startCommand": "php -d display_errors=On -d display_startup_errors=On -S 0.0.0.0:$PORT -t public server.php",
-    "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
-  }
+    "$schema": "https://railway.app/railway.schema.json",
+    "build": {
+        "builder": "NIXPACKS",
+        "buildCommand": "composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs && php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan vendor:publish --provider=\"Sendportal\\Base\\SendportalBaseServiceProvider\" --tag=sendportal-assets --force"
+    },
+    "deploy": {
+        "startCommand": "php -d display_errors=On -d display_startup_errors=On -S 0.0.0.0:$PORT -t public server.php",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+    }
 }
-
