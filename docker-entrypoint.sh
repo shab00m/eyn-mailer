@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+echo "==> Clearing any cached config first..."
+php artisan config:clear
+php artisan cache:clear
+
 echo "==> Publishing SendPortal assets..."
 php artisan vendor:publish --provider="Sendportal\Base\SendportalBaseServiceProvider" --tag=sendportal-assets --force
 
@@ -43,8 +47,7 @@ else
     echo "WARNING: Seeder failed (may already be seeded)"
 fi
 
-echo "==> Clearing cache..."
-php artisan config:clear
+echo "==> Optimizing for production..."
 php artisan route:clear
 php artisan view:clear
 
