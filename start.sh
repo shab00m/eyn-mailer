@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+echo "Clearing config cache..."
+php artisan config:clear
+php artisan cache:clear
+
+echo "Checking DATABASE_URL..."
+echo "DATABASE_URL is set: ${DATABASE_URL:+YES}"
+
 echo "Running database migrations..."
 php artisan migrate --force || echo "Migrations failed or already applied"
 
